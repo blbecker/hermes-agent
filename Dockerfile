@@ -22,3 +22,5 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --de
 
 # Verify Rust installation
 RUN cargo --version && rustc --version
+
+RUN npm install -g agentmail-cli@latest
