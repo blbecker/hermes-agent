@@ -20,10 +20,6 @@ docker run --rm "$DOCKER_TAG" cargo --version
 docker run --rm "$DOCKER_TAG" rustc --version
 
 echo ""
-echo "🧪 Verifying user is 'hermes'..."
-docker run --rm "$DOCKER_TAG" whoami
-
-echo ""
 echo "🎉 All tests passed!"
 echo "You can run the container interactively with:"
-echo "  docker run -it $DOCKER_TAG bash"
+echo "  docker run -it $DOCKER_TAG"

@@ -7,6 +7,7 @@ Custom derivative of `nousresearch/hermes-agent` with Rust toolchain pre-install
 ## Features
 - Based on `nousresearch/hermes-agent:v2026.9.24`
 - Rust toolchain (stable) installed via rustup
+- Maintains upstream user and entrypoint
 - Automatic versioning with GitVersion
 - CI/CD pipeline with GitHub Actions
 - Automatic updates via Renovate (manual review)
