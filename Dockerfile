@@ -1,13 +1,24 @@
 ARG BASE_IMAGE_TAG=v2026.9.24
 FROM nousresearch/hermes-agent:${BASE_IMAGE_TAG}
 
-# Install system dependencies for Rust
+ARG GITHUB_CLI_VERSION=2.102.0
+
+# Install system dependencies for Rust and GitHub CLI
 RUN apt-get update && apt-get install -y \
     curl \
     build-essential \
     pkg-config \
     libssl-dev \
+    tar \
+    gzip \
     && rm -rf /var/lib/apt/lists/*
+
+# Install GitHub CLI
+RUN curl -L "https://github.com/cli/cli/releases/download/v${GITHUB_CLI_VERSION}/gh_${GITHUB_CLI_VERSION}_linux_amd64.tar.gz" -o /tmp/gh.tar.gz \
+    && tar -xzf /tmp/gh.tar.gz -C /tmp \
+    && mv /tmp/gh_${GITHUB_CLI_VERSION}_linux_amd64/bin/gh /usr/local/bin/gh \
+    && rm -rf /tmp/gh.tar.gz /tmp/gh_${GITHUB_CLI_VERSION}_linux_amd64 \
+    && gh --version
 
 # Install Rust toolchain using rustup
 ENV RUSTUP_HOME=/usr/local/rustup \
