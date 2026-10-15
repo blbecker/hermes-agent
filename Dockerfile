@@ -2,6 +2,7 @@ ARG BASE_IMAGE_TAG=v2026.9.24
 FROM nousresearch/hermes-agent:${BASE_IMAGE_TAG}
 
 ARG GITHUB_CLI_VERSION=2.102.0
+ARG SOPS_VERSION=3.13.3
 
 # Install system dependencies for Rust and GitHub CLI
 RUN apt-get update && apt-get install -y \
@@ -33,5 +34,11 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --de
 
 # Verify Rust installation
 RUN cargo --version && rustc --version
+
+# Install sops for secrets management
+RUN curl -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64 -o /tmp/sops \
+    && mv /tmp/sops /usr/local/bin/sops \
+    && chmod +x /usr/local/bin/sops \
+    && sops --version
 
 RUN npm install -g agentmail-cli@latest
