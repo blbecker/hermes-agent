@@ -42,3 +42,6 @@ RUN curl -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/s
     && sops --version
 
 RUN npm install -g agentmail-cli@latest
+
+# Install Google Workspace CLI
+RUN npm install -g @googleworkspace/cli
