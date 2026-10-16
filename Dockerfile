@@ -41,7 +41,13 @@ RUN curl -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/s
     && chmod +x /usr/local/bin/sops \
     && sops --version
 
-RUN npm config set allow-scripts=hermes-agent --location=user \
-    && npm install -g agentmail-cli@latest \
-    && npm install -g --allow-scripts=@googleworkspace/cli
+# Install googleworkspace 
+RUN curl -L https://github.com/googleworkspace/cli/releases/download/v0.22.5/google-workspace-cli-x86_64-unknown-linux-gnu.tar.gz -o /tmp/gws.tgz \
+    && mkdir -p /tmp/gws \
+    && tar xzvf /tmp/gws.tgz -C /tmp/gws \
+    && mv /tmp/gws/gws /usr/local/bin/gws \
+    && chmod +x /usr/local/bin/gws \
+    && gws --version
+
+RUN npm install -g agentmail-cli@latest
 
