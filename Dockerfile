@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     tar \
     gzip \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GitHub CLI
@@ -50,4 +51,10 @@ RUN curl -L https://github.com/googleworkspace/cli/releases/download/v0.22.5/goo
     && gws --version
 
 RUN npm install -g agentmail-cli@latest
+
+# Install Google Workspace Node.js CLI (alternative to binary)
+RUN npm install -g @googleworkspace/cli
+
+# Install Google Workspace Python dependencies
+RUN pip3 install --break-system-packages google-api-python-client==2.194.0 google-auth==2.55.1 google-auth-oauthlib==1.3.1 google-auth-httplib2==0.3.1 httplib2==0.32.0 pyasn1==0.6.4
 
