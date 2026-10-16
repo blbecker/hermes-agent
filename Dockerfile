@@ -51,3 +51,5 @@ RUN curl -L https://github.com/googleworkspace/cli/releases/download/v0.22.5/goo
 
 RUN npm install -g agentmail-cli@latest
 
+RUN uv pip install google-auth google-api-python-client
+
