@@ -8,12 +8,15 @@ ARG SOPS_VERSION=3.13.3
 ARG KUBECTL_VERSION=v1.36
 ARG GOOGLE_WORKSPACE_CLI_VERSION=v0.22.5
 
-# Install system dependencies for Rust and GitHub CLI
+# Install system dependencies for Rust, GitHub CLI, and audio analysis Python packages
 RUN apt-get update && apt-get install -y \
     curl \
     build-essential \
     pkg-config \
     libssl-dev \
+    ffmpeg \
+    libsndfile1 \
+    libtbb12 \
     tar \
     gzip \
     gnupg \
