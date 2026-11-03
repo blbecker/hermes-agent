@@ -3,6 +3,7 @@ FROM nousresearch/hermes-agent:${BASE_IMAGE_TAG}
 
 ARG GITHUB_CLI_VERSION=2.102.0
 ARG SOPS_VERSION=3.13.3
+ARG YQ_VERSION=v4.54.1
 
 # Install kubectl
 ARG KUBECTL_VERSION=v1.36
@@ -19,6 +20,7 @@ RUN apt-get update && apt-get install -y \
     libtbb12 \
     tar \
     gzip \
+    jq \
     gnupg \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
@@ -58,6 +60,11 @@ RUN curl -L https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/s
     && mv /tmp/sops /usr/local/bin/sops \
     && chmod +x /usr/local/bin/sops \
     && sops --version
+
+# Install yq (mikefarah) for YAML/JSON/XML querying
+RUN curl -L "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" -o /usr/local/bin/yq \
+    && chmod +x /usr/local/bin/yq \
+    && yq --version && jq --version
 
 # Install googleworkspace 
 RUN curl -L https://github.com/googleworkspace/cli/releases/download/${GOOGLE_WORKSPACE_CLI_VERSION}/google-workspace-cli-x86_64-unknown-linux-gnu.tar.gz -o /tmp/gws.tgz \
