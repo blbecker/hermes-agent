@@ -25,6 +25,14 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
+# PATH for volume-backed CLIs (CR packages.npm / packages.pip, uv tools, ~/.local/bin).
+# /etc/profile assigns PATH unconditionally, which discards this image's ENV PATH, and
+# Hermes replays the login-shell env for every agent command -- so the dirs are restored
+# from a profile.d hook instead of ENV. See the script for the full rationale.
+COPY profile.d/ /etc/profile.d/
+RUN chmod 0644 /etc/profile.d/*.sh \
+    && sh -c '. /etc/profile.d/00-hermes-pvc-path.sh && echo "profile.d PATH hook ok: $PATH"'
+
 # Install kubectl
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates curl \

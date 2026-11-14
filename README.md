@@ -11,6 +11,7 @@ Custom derivative of `nousresearch/hermes-agent` with Rust toolchain pre-install
 - Automatic versioning with GitVersion
 - CI/CD pipeline with GitHub Actions
 - Automatic updates via Renovate (manual review)
+- `/etc/profile.d/00-hermes-pvc-path.sh` puts the volume-backed CLI dirs on `PATH` (`$HERMES_HOME/.npm-packages/bin`, `.python-packages/bin`, `.local/bin`, `~/.local/bin`, `/usr/local/cargo/bin`) — `/etc/profile` resets `PATH`, so `ENV` alone never reaches agent shells
 
 ## Building Locally
 
