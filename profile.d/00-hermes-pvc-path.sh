@@ -16,6 +16,7 @@ for _hermes_bin in \
     "${HERMES_HOME:-/opt/data}/.python-packages/bin" \
     "${HERMES_HOME:-/opt/data}/bin" \
     "${HERMES_HOME:-/opt/data}/.local/bin" \
+    /opt/hermes/bin \
     /usr/local/cargo/bin; do
     [ -d "$_hermes_bin" ] || continue
     case ":$PATH:" in
