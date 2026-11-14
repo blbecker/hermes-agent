@@ -11,6 +11,7 @@ Custom derivative of `nousresearch/hermes-agent` with Rust toolchain pre-install
 - Automatic versioning with GitVersion
 - CI/CD pipeline with GitHub Actions
 - Automatic updates via Renovate (manual review)
+- Bundled Node CLIs installed from [`package.json`](package.json) + `package-lock.json` (`npm ci`, bins symlinked into `/usr/local/bin`): `agentmail`, `bd` ([beads](https://github.com/gastownhall/beads)), `opencode` — Renovate bumps their versions
 
 ## Building Locally
 

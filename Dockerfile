@@ -74,8 +74,19 @@ RUN curl -L https://github.com/googleworkspace/cli/releases/download/${GOOGLE_WO
     && chmod +x /usr/local/bin/gws \
     && gws --version
 
-# Install Agentmail
-RUN npm install -g agentmail-cli@latest
+# Install the Node CLIs (agentmail, beads `bd`, opencode) from package.json/package-lock.json.
+# Renovate updates the two files; `npm ci` makes the build reproducible. Bins are symlinked
+# into /usr/local/bin, which stays on PATH for every shell in this image.
+COPY package.json package-lock.json /opt/npm-tools/
+RUN cd /opt/npm-tools \
+    && npm ci --omit=dev --no-audit --no-fund \
+    && rm -rf node_modules/@opencode/cli-* \
+    && for bin in node_modules/.bin/*; do ln -sf "$(readlink -f "$bin")" "/usr/local/bin/$(basename "$bin")"; done \
+    && bd version \
+    && agentmail --version \
+    && opencode --version
+# The rm drops the foreign/duplicate builds of the opencode binary (~700 MB). Its postinstall
+# hard-links the build-platform one into @opencode/cli/bin, so the remaining copy is standalone.
 
 # Install Google Workspace dependencies
 RUN uv pip install google-auth google-api-python-client

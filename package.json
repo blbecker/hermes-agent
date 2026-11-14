@@ -1,0 +1,12 @@
+{
+  "name": "hermes-agent-cli-tools",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Node CLIs baked into the hermes-agent image. Versions here (and in package-lock.json) are managed by Renovate; the Dockerfile installs exactly this set with `npm ci` and links their bins into /usr/local/bin.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@beads/bd": "1.3.4",
+    "@opencode/cli": "2.3.0",
+    "agentmail-cli": "1.10.0"
+  }
+}
