@@ -35,13 +35,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@220647997b450f3e9364b6cf6a357197f17d924b # v4.7.2
+        uses: gittools/actions/gitversion/setup@389fe43e6b0189b98c40c43553070ac029304635 # v5.0.0
         with:
           versionSpec: "6.6.x"
 
       - name: Determine Version
         id: version_step # step id used as a reference for output values
-        uses: gittools/actions/gitversion/execute@220647997b450f3e9364b6cf6a357197f17d924b # v4.7.2
+        uses: gittools/actions/gitversion/execute@389fe43e6b0189b98c40c43553070ac029304635 # v5.0.0
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4
